@@ -4,77 +4,46 @@ import java.util.Random;
 
 public class Randomizer {
 
-	private String list;
-	private int numberOfWords;
+	private String[] list; // lines stored separately inside the array
 
 	/**
-	 * Constructor
+	 * Input a multi-line string and get it back randomized
 	 * 
-	 * @param input
+	 * @param input Multi-line string
+	 * @return String with randomized line order
 	 */
-	public Randomizer(String input) {
-		list = input;
-		list = cleanup(list);
-		numberOfWords = countWords(list);
-		String[] listArray = split(list);
-		listArray = randomize(listArray);
-		list = format(listArray);
+	public String randomize(String input) {
+		list = randomizeArray(split(input));
+		return format(list);
 	}
 
 	/**
-	 * Turns all lines into a single line separated by commas
+	 * Split string and store it inside array
 	 * 
-	 * @param input String to simplify
-	 * @return Simplified string
-	 */
-	private String cleanup(String input) {
-		return input.replaceAll("\n", ",");
-	}
-
-	/**
-	 * Counts all words / lines
-	 * 
-	 * @param input
-	 * @return Number of words / lines
-	 */
-	private int countWords(String input) {
-		int wordcount = 1;
-		for (int i = 0; i < input.length(); i++) {
-			if (input.charAt(i) == ',') {
-				wordcount++;
-			}
-		}
-		return wordcount;
-	}
-
-	/**
-	 * Splits every word
-	 * 
-	 * @param input
-	 * @return Array with each index representing one word
+	 * @param input Mulit-line string
+	 * @return Array filled with the string's content
 	 */
 	private String[] split(String input) {
-		String[] strings = input.split(",");
-		return strings;
+		return input.split("\n");
 	}
 
 	/**
-	 * Randomize the order of the words inside the array
+	 * Randomize the order of the content inside the array
 	 * 
-	 * @param input Array filled with words
+	 * @param stringArray <b>Filled</b> array
 	 * @return Randomized array
 	 */
-	private String[] randomize(String[] input) {
-		Random iterations = new Random();
-		int numberOfRounds = iterations.nextInt(100) + 1;
+	private String[] randomizeArray(String[] stringArray) {
+		Random random = new Random();
+		int numberOfRounds = random.nextInt(100) + 1;
 		for (int i = 0; i < numberOfRounds; i++) {
-			int pos1 = iterations.nextInt(input.length - 1);
-			int pos2 = iterations.nextInt(input.length - 1);
-			String tmp = input[pos1];
-			input[pos1] = input[pos2];
-			input[pos2] = tmp;
+			int pos1 = random.nextInt(stringArray.length - 1);
+			int pos2 = random.nextInt(stringArray.length - 1);
+			String tmp = stringArray[pos1];
+			stringArray[pos1] = stringArray[pos2];
+			stringArray[pos2] = tmp;
 		}
-		return input;
+		return stringArray;
 	}
 
 	/**
@@ -88,19 +57,12 @@ public class Randomizer {
 	}
 
 	/**
+	 * Count number of lines
 	 * 
-	 * @return List
+	 * @return Number of lines
 	 */
-	public String getList() {
-		return list;
-	}
-
-	/**
-	 * 
-	 * @return Number of words inside the list
-	 */
-	public int getNumberOfWords() {
-		return numberOfWords;
+	public int count() {
+		return list.length;
 	}
 
 }
