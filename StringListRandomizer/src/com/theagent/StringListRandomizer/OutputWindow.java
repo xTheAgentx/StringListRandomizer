@@ -18,12 +18,10 @@ import javax.swing.JScrollPane;
 
 public class OutputWindow extends JDialog {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
+
 	private final JPanel contentPanel = new JPanel();
-	
+
 	private JLabel lblSaveStatus;
 
 	/**
@@ -56,11 +54,13 @@ public class OutputWindow extends JDialog {
 				JButton saveButton = new JButton("Save");
 				saveButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						// export result as txt file
 						FileOperations fo = new FileOperations();
 						if (fo.saveFile(content)) {
 							lblSaveStatus.setText("File saved!");
 							lblSaveStatus.setForeground(Color.GREEN);
 						} else {
+							// if file was not saved (correctly)
 							lblSaveStatus.setText("File not saved!");
 							lblSaveStatus.setForeground(Color.RED);
 						}
@@ -80,7 +80,7 @@ public class OutputWindow extends JDialog {
 				JButton closeButton = new JButton("Close");
 				closeButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						dispose();
+						dispose(); // close window
 					}
 				});
 				closeButton.setActionCommand("Cancel");

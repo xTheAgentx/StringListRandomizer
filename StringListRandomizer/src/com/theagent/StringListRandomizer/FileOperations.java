@@ -10,13 +10,18 @@ import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class FileOperations {
-	
-	private Path selectedFile;
-	
+
+	private Path selectedFile; // path to opened file
+
+	/**
+	 * Open a txt file
+	 * 
+	 * @return Content of file as string
+	 */
 	public String openFile() {
 		JFileChooser fileChooser = new JFileChooser();
 		FileNameExtensionFilter filter = new FileNameExtensionFilter(".txt", "txt"); // only txt files can be opened
-		fileChooser.setFileFilter(filter);
+		fileChooser.setFileFilter(filter); // apply txt file filter
 		fileChooser.setDialogTitle("Select list file (.txt)");
 
 		if (fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
@@ -28,18 +33,24 @@ public class FileOperations {
 				e1.printStackTrace();
 			}
 		}
-		
+
 		return null; // if no file was chosen
 	}
-	
+
+	/**
+	 * Export string as a txt file
+	 * 
+	 * @param content String to export
+	 * @return File was saved correctly
+	 */
 	public boolean saveFile(String content) {
 		JFileChooser fileChooser = new JFileChooser();
 		FileNameExtensionFilter filter = new FileNameExtensionFilter(".txt", "txt"); // can only be saved as txt file
 		fileChooser.setFileFilter(filter);
 		fileChooser.setDialogTitle("Save randomized list file (.txt)");
-		
+
 		File newFile;
-		
+
 		if (fileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
 			newFile = fileChooser.getSelectedFile();
 
@@ -56,5 +67,5 @@ public class FileOperations {
 		}
 		return false;
 	}
-	
+
 }
