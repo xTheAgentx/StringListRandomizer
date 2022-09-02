@@ -84,11 +84,7 @@ public class Randomizer {
 	 * @return Formatted string
 	 */
 	private String format(String[] input) {
-		String formattedString = input[0];
-		for (int i = 1; i < input.length; i++) {
-			formattedString += "," + input[i];
-		}
-		return formattedString.replaceAll(",", "\n");
+		return String.join("\n", input);
 	}
 
 	/**
